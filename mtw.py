@@ -17,7 +17,7 @@ mtw qname add / rm / done X
 help = "options are: q(queue), any qeue name and ls "
 
 
-def exec_cmds(mystorage):
+def exec_cmds(mystorage,args):
     
     
 

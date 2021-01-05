@@ -52,7 +52,7 @@ class storage:
         return self.data.keys()
 
     def srt_queue(self,q):
-        self.data[q].sort(key=lambda x:(x['due'], self.data_int.get(f"{q}_{x[name]}",0)))
+        self.data[q].sort(key=lambda x:(x['due'], self.data_int.get(f"{q}_{x['name']}",0)))
 
     ########
     #  tasks 

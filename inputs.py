@@ -11,7 +11,8 @@ def parse_new_task(args):
 		date= _readdate(args[2]) + _readhours(args[3])
 	else:
 		date = _readdate(args[2])
-	return date.isoformat()
+
+	return name,date.isoformat(),interval
 	
 
 
