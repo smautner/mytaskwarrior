@@ -12,14 +12,16 @@ def format_event(task):
         return ''
     else:
         now = dt.datetime.now()
+
         days = (task['due']-now).days
+
         if days < 0:
             color = 'red'
         elif days < 1:
             color = 'yellow'
         else:
             color = 'green'
-        if task['due'].hour == 0 and task['due'].minute == 0:
+        if (task['due'].hour,  task['due'].minute) in [(23,59),(0,0)] :
             due_str = task['due'].strftime('%b %d')
         else:
             due_str = task['due'].strftime('%b %d %H%M')

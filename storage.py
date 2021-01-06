@@ -88,5 +88,5 @@ class storage:
             due=t['due']
             now = dt.datetime.now()
             today = dt.datetime(year=now.year,month=now.month,day= now.day)
-            t['due'] =   today + dt.timedelta(days = interval, hours= due.hour, minutes=due.minute)
+            t['due'] =   today + dt.timedelta(days = interval, hours= 23, minutes=59)
             self.srt_queue(q)
