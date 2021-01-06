@@ -10,7 +10,7 @@ def parse_new_task(args):
 	if len(args)==4:
 		date= _readdate(args[2]) + _readhours(args[3])
 	else:
-		date = _readdate(args[2])
+		date = _readdate(args[2]) + dt.timedelta(hours =23, minutes=59)
 
 	return name,date.isoformat(),interval
 	
@@ -20,7 +20,7 @@ def parse_new_task(args):
 
 # this is easy:
 def _readhours(s):
-    h,m = s[:2],s[2:]
+    h,m =  s[:2],s[2:]
     return dt.timedelta(hours = int(h), minutes= int(m))
 
 

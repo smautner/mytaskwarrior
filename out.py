@@ -21,7 +21,7 @@ def format_event(task):
             color = 'yellow'
         else:
             color = 'green'
-        if (task['due'].hour,  task['due'].minute) in [(23,59),(0,0)] :
+        if (task['due'].hour,  task['due'].minute) in [(23,59),(0,0)] : # 00 is legacy..
             due_str = task['due'].strftime('%b %d')
         else:
             due_str = task['due'].strftime('%b %d %H%M')
