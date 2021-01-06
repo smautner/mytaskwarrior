@@ -86,5 +86,7 @@ class storage:
             self.data[q].remove(t)
         else:
             due=t['due']
-            t['due'] =   today() + dt.timedelta(days = interval, hours= due.hour, minutes=due.minute)
+            now = dt.datetime.now()
+            today = dt.datetime(year=now.year,month=now.month,day= now.day)
+            t['due'] =   today + dt.timedelta(days = interval, hours= due.hour, minutes=due.minute)
             self.srt_queue(q)

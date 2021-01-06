@@ -40,12 +40,10 @@ def exec_cmds(mystorage,args):
         elif args [1] == 'rm' and len(args)==3:
             mystorage.delT(q=args[0],t=args[2])
 
-        elif args [1] == 'done' and len(args) ==2 :
+        elif args [1] == 'done' and len(args) ==3 :
                 mystorage.done(q=args[0], tname= args[2])
         else:
             print('add[name][due][repeat] rm [name] done [name]')
-
-
 
         
     else:
