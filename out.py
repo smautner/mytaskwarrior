@@ -17,10 +17,12 @@ def format_event(task):
 
         if days < 0:
             color = 'red'
+            return f"[{color}]{task['name']} {days} [/{color}]"
         elif days < 1:
             color = 'yellow'
         else:
             color = 'green'
+
         if (task['due'].hour,  task['due'].minute) in [(23,59),(0,0)] : # 00 is legacy..
             due_str = task['due'].strftime('%b %d')
         else:
