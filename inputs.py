@@ -3,16 +3,22 @@ import datetime as dt
 
 
 def parse_new_task(args):
-	#datetime.fromisoformat('2011-11-04 00:05') <- this will work so we build this
- 
-	name = args[0]
-	interval = int(args[1])
-	if len(args)==4:
-		date= _readdate(args[2]) + _readhours(args[3])
-	else:
-		date = _readdate(args[2]) + dt.timedelta(hours =23, minutes=59)
+	#datetime.fromisoformat('2011-11-04 00:05') <- this will work so we return this as date
 
-	return name,date.isoformat(),interval
+    name = args[0] # <- so this is easy.. 
+
+    # get hours: either last arg is hhmm or we assume 2359
+    if len(args[-1]) == 4:
+        hours = _readhours(args.pop())
+    else:
+        hours = dt.timedelta(hours =23, minutes=59)
+        
+    # get date, since we popped the hour(if it existed) we know that the date is next
+    date = _readdate(args.pop())
+
+    interval = 0 if len(args) == 1 else int(args[1]) # if len is 1 there is only "name"
+
+    return name,date.isoformat(),interval
 	
 
 
