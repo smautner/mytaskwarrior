@@ -4,22 +4,17 @@ import sys
 import inputs 
 import out 
 
-    
-
 ############################
 # ARGPARSE
 ##########################
+help = '''
+mtw q add  qname
+mtw q rm qname
+mtw qname add / rm / done  
 '''
-mtw q add 
-mtw q rm
-mtw qname add / rm / done X 
-'''
-help = "options are: q(queue), any qeue name and ls "
 
 
 def exec_cmds(mystorage,args):
-    
-    
 
     if args[0] == 'q' and len(args) == 3:
         if args[1] == 'add':
@@ -43,29 +38,20 @@ def exec_cmds(mystorage,args):
         elif args [1] == 'done' and len(args) ==3 :
                 mystorage.done(q=args[0], tname= args[2])
         else:
-            print('add[name][due][repeat] rm [name] done [name]')
+            print('add name [repeat] [due] rm [name] done [name]')
 
         
     else:
         print(help)
 
 
-
-
-
-
-
 if __name__ == "__main__":
-    mystorage = storage.storage('/home/ikea/projects/mtw.dmp','/home/ikea/projects/mtw.json')
     
-    if len(sys.argv[1:]) == 0:
-        print (help)
+    mystorage = storage.storage('/home/ikea/projects/mtw.dmp','/home/ikea/projects/mtw.json')
+    out.show_prios(mystorage)
 
-    args = sys.argv[1:]
-    if args[0] == 'ls':
-        out.show_prios(mystorage)
-    else:
-        exec_cmds(mystorage, args)
+    if len(sys.argv[1:]) > 0:
+        exec_cmds(mystorage, sys.argv[1:])
         mystorage.save()
 
 
