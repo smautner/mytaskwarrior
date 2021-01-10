@@ -14,10 +14,11 @@ def parse_new_task(args):
         hours = dt.timedelta(hours =23, minutes=59)
         
     # get date, since we popped the hour(if it existed) we know that the date is next
-    date = _readdate(args.pop())
+    date = _readdate(args.pop()) + hours
 
     interval = 0 if len(args) == 1 else int(args[1]) # if len is 1 there is only "name"
 
+    print( name,date.isoformat(),interval)
     return name,date.isoformat(),interval
 	
 

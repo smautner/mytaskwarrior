@@ -48,10 +48,10 @@ def exec_cmds(mystorage,args):
 if __name__ == "__main__":
     
     mystorage = storage.storage('/home/ikea/projects/mtw.dmp','/home/ikea/projects/mtw.json')
-    out.show_prios(mystorage)
 
     if len(sys.argv[1:]) > 0:
         exec_cmds(mystorage, sys.argv[1:])
         mystorage.save()
 
+    out.show_prios(mystorage)
 

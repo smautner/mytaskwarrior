@@ -11,6 +11,10 @@ def format_event(task):
     if len(task)==0:
         return ''
     else:
+        # d = task['due'].strftime('%b %d %H%M')
+        # n = task['name'] 
+        # return f"{n} {d}"
+
         now = dt.datetime.now()
 
         days = (task['due']-now).days
