@@ -18,7 +18,7 @@ def parse_new_task(args):
 
     interval = 0 if len(args) == 1 else int(args[1]) # if len is 1 there is only "name"
 
-    print( name,date.isoformat(),interval)
+    #print( name,date.isoformat(),interval)
     return name,date.isoformat(),interval
 	
 
