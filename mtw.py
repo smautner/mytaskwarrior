@@ -8,41 +8,36 @@ import out
 # ARGPARSE
 ##########################
 help = '''
-mtw q add  qname
-mtw q rm qname
-mtw qname add / rm / done  
+qname add tname duedate [hhmm] [interval]
+qname rm tname 
+qname done tname 
+--> in any case print table
 '''
 
 
 def exec_cmds(mystorage,args):
+    qname = args[0]
+    command = args[1]
+    tname = args[2]
+    rest = args[3:]
+    
+    
 
-    if args[0] == 'q' and len(args) == 3:
-        if args[1] == 'add':
-            mystorage.addQ(args[2])
-        elif args[1] == 'rm':
-            mystorage.delQ(args[2])
-        else:
-            print("what do u what with q? rm / add (qname)")
-            
-            
-
-    elif args[0] in mystorage.get_queues():
-        # first arg is a quename, now we can work on that Q 
-        if args [1] == 'add':
-            name, due, interval = inputs.parse_new_task(args[2:])
-            mystorage.addT(q=args[0] ,t = name, due=due, interval=interval)
-            
-        elif args [1] == 'rm' and len(args)==3:
-            mystorage.delT(q=args[0],t=args[2])
-
-        elif args [1] == 'done' and len(args) ==3 :
-                mystorage.done(q=args[0], tname= args[2])
-        else:
-            print('add name [repeat] [due] rm [name] done [name]')
-
+    if command == 'rm':
+        mystorage.delT(q=qname,t=tname)
+        
+    elif command == 'done':
+        mystorage.done(q=qname, tname= tname)
+    
+    
+    elif command == 'add':
+        due, interval = inputs.parse_new_task(rest)
+        mystorage.addT(q=qname ,t = tname, due=due, interval=interval)
         
     else:
         print(help)
+    
+
 
 
 if __name__ == "__main__":

@@ -38,15 +38,15 @@ class storage:
 
 
     #################
-    # QUEUES
+    # QUEUES 
     ##############
     def addQ(self,q): 
-        if q in self.data:
-            print("already exists")
-        else:
+        if q not in self.data:
             self.data[q]=[]
-    def delQ(self,q): 
-        self.data.pop(q)
+            
+    def delQ(self,q):
+        if not self.data[q]:  # only delete when empty
+            self.data.pop(q)
 
     def get_queues(self):
         return self.data.keys()
@@ -54,19 +54,25 @@ class storage:
     def srt_queue(self,q):
         self.data[q].sort(key=lambda x:(x['due'], self.data_int.get(f"{q}_{x['name']}",0)))
 
+
+
     ########
     #  tasks 
     ###########
 
     def delT(self,q='queue',t='task'): 
         self.data[q] =  Filter(lambda task: task['name']!=t, self.data[q])
+        
+        self.delQ(q) # dump whole q if empty
+        self.data_int.pop(f"{q}_{t}",0) # also remove from interval
 
-    def addT(self,q='queue',t='task', due ='', interval= ''):
+    def addT(self,q='queue',t='task', due ='iso format', interval= 0):
         due = dt.datetime.fromisoformat(due) 
         task = {'name':t,'due':due}
         interval = int(interval)
         if interval >0 :
             self.data_int[f"{q}_{t}"]  = interval
+        self.addQ(q) # add q if not there already
         self.data[q].append(task)
         self.srt_queue(q)
 
@@ -74,16 +80,18 @@ class storage:
         return [v[:max] for v in self.data.values()  ] # note: i should sort on insert
 
     def done(self,q,tname): 
+        # get the task 
         for i,t in enumerate(self.data[q]):
             if t['name'] == tname:
                 break
         else:
             print (f"task {t} not in quque {q}")
             return
-        
+            
+        # rm if interval == 0 
         interval = self.data_int.get(f"{q}_{tname}"  ,0)
         if interval == 0:
-            self.data[q].remove(t)
+            self.delT(q,t)
         else:
             due=t['due']
             now = dt.datetime.now()
