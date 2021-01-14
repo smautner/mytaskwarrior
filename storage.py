@@ -61,8 +61,10 @@ class storage:
     ###########
 
     def delT(self,q='queue',t='task'): 
-        self.data[q] =  Filter(lambda task: task['name']!=t, self.data[q])
-        
+        #self.data[q] =  Filter(lambda task: task['name']!=t, self.data[q])
+        task  = self._get_task(q,t) 
+        self.data[q].remove(task)
+
         self.delQ(q) # dump whole q if empty
         self.data_int.pop(f"{q}_{t}",0) # also remove from interval
 
@@ -79,19 +81,25 @@ class storage:
     def get_tasks(self,max=1000): 
         return [v[:max] for v in self.data.values()  ] # note: i should sort on insert
 
-    def done(self,q,tname): 
-        # get the task 
+
+
+    def _get_task(q,t): 
+       # get the task 
         for i,t in enumerate(self.data[q]):
             if t['name'] == tname:
-                break
+                return t 
         else:
             print (f"task {t} not in quque {q}")
-            return
+
+
+    def done(self,q,tname): 
+        # get the task 
+        t = self._get_task(q,tname)
             
         # rm if interval == 0 
         interval = self.data_int.get(f"{q}_{tname}"  ,0)
         if interval == 0:
-            self.delT(q,t)
+            self.delT(q,tname)
         else:
             due=t['due']
             now = dt.datetime.now()

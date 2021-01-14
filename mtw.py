@@ -29,7 +29,6 @@ def exec_cmds(mystorage,args):
     elif command == 'done':
         mystorage.done(q=qname, tname= tname)
     
-    
     elif command == 'add':
         due, interval = inputs.parse_new_task(rest)
         mystorage.addT(q=qname ,t = tname, due=due, interval=interval)
