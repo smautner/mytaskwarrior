@@ -8,7 +8,8 @@ in any case we output the table
 
 
 i could switch to docopt... would look like this: 
+```
 Usage:
     mtw.py <qname> (rm|done) <tname>
     mtw.py <qname> add <tname> <date> [INTHHMM ...]
-
+```
