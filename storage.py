@@ -83,7 +83,7 @@ class storage:
 
 
 
-    def _get_task(q,t): 
+    def _get_task(self,q,tname): 
        # get the task 
         for i,t in enumerate(self.data[q]):
             if t['name'] == tname:
