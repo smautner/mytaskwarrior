@@ -33,6 +33,10 @@ def exec_cmds(mystorage,args):
         due, interval = inputs.parse_new_task(rest)
         mystorage.addT(q=qname ,t = tname, due=due, interval=interval)
         
+    elif command == 'mv':
+        mystorage.delT(q=qname,t=tname)
+        due, interval = inputs.parse_new_task(rest)
+        mystorage.addT(q=qname ,t = tname, due=due, interval=interval)
     else:
         print(help)
     
