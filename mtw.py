@@ -11,6 +11,7 @@ help = '''
 qname add tname duedate [hhmm] [interval]
 qname rm tname 
 qname done tname 
+qname mv tname duedate [hhmm] [inteval] 
 --> in any case print table
 '''
 
