@@ -1,8 +1,8 @@
 from lmz import *
-import storage 
+import mtw.storage  as storage
 import sys
-import inputs 
-import out 
+import mtw.inputs  as inputs 
+import mtw.out  as out
 
 ############################
 # ARGPARSE
@@ -44,8 +44,8 @@ def exec_cmds(mystorage,args):
 
 
 
-if __name__ == "__main__":
-    
+
+def main():
     mystorage = storage.storage('/home/ikea/projects/mtw.dmp','/home/ikea/projects/mtw.json')
 
     if len(sys.argv[1:]) > 0:
@@ -54,3 +54,5 @@ if __name__ == "__main__":
 
     out.show_prios(mystorage)
 
+if __name__ == "__main__":
+    main()
